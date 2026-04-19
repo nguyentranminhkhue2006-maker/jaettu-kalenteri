@@ -82,6 +82,7 @@ def add_event():
     if not description or len(description)>1000:
         flash("Invalid description")
         return redirect("/new_event")
+
     user_id= session["user_id"]
 
     classes=[]
