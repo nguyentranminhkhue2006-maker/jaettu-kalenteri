@@ -65,7 +65,7 @@ def show_event(event_id):
 @app.route("/new_event")
 def new_event():
     require_login()
-    check_csrf()
+    session["csrf_token"] = secrets.token_hex(16)
 
     classes=events.get_all_classes()
     cur_date=datetime.now() + timedelta(days=1)
