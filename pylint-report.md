@@ -80,7 +80,7 @@ The report shows this type of declaration regarding return-statements:
 app.py:222:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
 ```
 
-This declaration refers to the situation, in which the function only returns when the method is either 'GET' or 'POST'. For example in the first 'GET','POST' function:
+This declaration refers to a situation in which the function only returns a value when the method is either 'GET' or 'POST'. For example, in the first 'GET'/'POST' function:
 
 ```
 @app.route("/cancel_event/<int:event_id>", methods=["GET","POST"])
@@ -104,17 +104,17 @@ def cancel_event(event_id):
         return redirect("/event/"+str(event_id))
 ```
 
-Although the function only gives a return when it is 'GET' or 'POST', there is still other cases, in which the method is something else and it will not return anything. However, this case can not happen in real situation, as the function has been decorated to only accept either 'GET'- or 'POST'-method. Therefore, there is no risk that the function will not return anything.
+Although the function only returns a value when the method is 'GET' or 'POST', there are theoretically other cases where the method could be something else, and the function would not return anything. However, this situation can not occur in practice, since the function is decorated to accept only 'GET' and 'POST' methods. Therefore, there is no risk that the function would fail to return a value.
 
 ## Invalid constant name
 
-The report shows this type of declaration regarding constant name:
+The report shows this type of declaration regarding constant naming:
 
 ```
 config.py:1:0: C0103: Constant name "secret_key" doesn't conform to UPPER_CASE naming style (invalid-name)
 ```
 
-The defined variable here is interpreted as a constant that should be written in upper case. However, according to the developer, it would be better for the variable to be written in smaller case. The variable is used in this code:
+The variable is interpreted as a constant that should be written in uppercase. However, according to the developer, it is preferable to keep the variable name in lowercase. The variable is used in the following code
 
 ```
 app.secret_key=config.secret_key
@@ -122,13 +122,13 @@ app.secret_key=config.secret_key
 
 ## Dangerous default value
 
-This is the delcaration regarding to dangerous default value:
+This is the declaration regarding a dangerous default value:
 
 ```
 db.py:20:0: W0102: Dangerous default value [] as argument (dangerous-default-value)
 ```
 
-The declaration is referring to these lines in the code:
+The declaration refers to the following code:
 
 ```
 def execute(sql, params=[]):
@@ -139,4 +139,4 @@ def execute(sql, params=[]):
     con.close()
 ```
 
-In this case, the default value of 'params' is '[]', an empty list. The problem with pasing empty list as a default argument is that it will be shared between all invocations of the function, and if the argument's content is changed during some function calls, the changes will be seen in other calls as well. This situation is not going to happend in practice, as the code does not apply any change to the list.
+In this case, the default value of 'params' is an empty list ('[]'). The problem with passing an empty list as a default argument is that it will be shared between all invocations of the function. If the contents of the list were modified during one call, the changes would persist in subsequent calls as well. However, in this function, the list is not modified, so this situation should not occur in practice.
