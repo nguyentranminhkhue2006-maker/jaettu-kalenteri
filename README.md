@@ -48,13 +48,13 @@ $ flask run
 
 ## Testing the functionality of the application with big amount of data
 
-The seed.py shows the test code for the situation, in which:
-* Number of users is a thousand
-* Number of events is a hundred of thousands
-* Number of comments is a million
+The seed.py file contains test code for a scenario where:
+* The number of users is 1000
+* The number of events is 100000
+* The number of comments is 1000000
 * A user_id and an event_id are selected randomly for each comment
 
-To test the runtime of the page requests, we can paste this prompt into the app.py:
+To measure the runtime of the page requests, the following code can be added to app.py:
 
 ```
 import time
@@ -72,14 +72,14 @@ def after_request(response):
     return response
 ```
 
-And then running the seed.py -file in the terminal:
+After that, run these commands in the terminal:
 
 ```
 $ python seed.py
 $ flask run
 ```
 
-When accessing the website, we should see a total of 10000 pages. This is the results we got when going to the next pages:
+When accessing the website, approximately 10000 pages should be available. The following results were observed when navigating between pages:
 
 ```
 elapsed time: 0.05 s
@@ -96,4 +96,4 @@ elapsed time: 0.0 s
 127.0.0.1 - - [03/May/2026 16:45:02] "GET /static/main.css HTTP/1.1" 304 -
 ```
 
-Under the circumstances in which there are thousands of users and thousands of events and comments, the application still runs with the approximate time of 0-0.05s.
+Under these conditions, with thousands of users and large numbers of events and comments, the application runs with an approximate response time of 0.00-0.05 seconds.
