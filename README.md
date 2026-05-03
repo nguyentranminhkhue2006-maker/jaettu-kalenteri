@@ -46,7 +46,7 @@ Run application:
 $ flask run
 ```
 
-## Testing the functionality of the application with big amount of data
+## Testing the functionality of the application with a large amount of data
 
 The seed.py file contains test code for a scenario where:
 * The number of users is 1000
